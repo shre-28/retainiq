@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RetainIQ | Customer Churn Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="topbar">
+
+            <div class="brand">
+                <div class="brand-mark">R</div>
+
+                <div>
+                    <h1>RetainIQ</h1>
+                    <p>Customer Intelligence</p>
+                </div>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Model Online
+            </div>
+
+        </header>
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <span class="eyebrow">
+                    CUSTOMER RETENTION ANALYTICS
+                </span>
+
+                <h2>
+                    Understand customer
+                    <span>churn risk</span>
+                    before it happens.
+                </h2>
+
+                <p>
+                    Enter customer information to generate an
+                    AI-powered churn risk assessment.
+                </p>
+
+            </div>
+
+
+            <div class="model-card">
+
+                <div class="model-card-label">
+                    ACTIVE MODEL
+                </div>
+
+                <div class="model-name">
+                    XGBoost
+                </div>
+
+                <div class="model-stats">
+
+                    <div>
+                        <strong>86.87%</strong>
+                        <small>Test Accuracy</small>
+                    </div>
+
+                    <div>
+                        <strong>ML</strong>
+                        <small>Classification</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MAIN CARD ================= -->
+
+        <main class="main-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Customer Profile</h3>
+
+                    <p>
+                        Provide the customer's account information
+                        for analysis.
+                    </p>
+                </div>
+
+                <span class="step">
+                    01 / 01
+                </span>
+
+            </div>
+
+
+            <!-- ================= FORM ================= -->
+
+            <form id="predictionForm"
+                  action="/predict"
+                  method="POST">
+
+
+                <div class="form-section">
+
+                    <h4>Personal Information</h4>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>Credit Score</label>
+
+                            <input
+                                type="number"
+                                name="CreditScore"
+                                min="300"
+                                max="850"
+                                placeholder="650"
+                                required
+                            >
+
+                            <span class="hint">
+                                Range: 300 – 850
+                            </span>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Age</label>
+
+                            <input
+                                type="number"
+                                name="Age"
+                                min="18"
+                                max="100"
+                                placeholder="40"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Gender</label>
+
+                            <select name="Gender" required>
+
+                                <option value="">
+                                    Select gender
+                                </option>
+
+                                <option value="Male">
+                                    Male
+                                </option>
+
+                                <option value="Female">
+                                    Female
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Geography</label>
+
+                            <select name="Geography" required>
+
+                                <option value="">
+                                    Select country
+                                </option>
+
+                                <option value="France">
+                                    France
+                                </option>
+
+                                <option value="Germany">
+                                    Germany
+                                </option>
+
+                                <option value="Spain">
+                                    Spain
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="divider"></div>
+
+
+                <div class="form-section">
+
+                    <h4>Account Information</h4>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>Tenure</label>
+
+                            <input
+                                type="number"
+                                name="Tenure"
+                                min="0"
+                                max="10"
+                                placeholder="5"
+                                required
+                            >
+
+                            <span class="hint">
+                                Years with the bank
+                            </span>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Account Balance</label>
+
+                            <input
+                                type="number"
+                                name="Balance"
+                                min="0"
+                                step="0.01"
+                                placeholder="100000"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Number of Products</label>
+
+                            <input
+                                type="number"
+                                name="NumOfProducts"
+                                min="1"
+                                max="4"
+                                placeholder="2"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Estimated Salary</label>
+
+                            <input
+                                type="number"
+                                name="EstimatedSalary"
+                                min="0"
+                                step="0.01"
+                                placeholder="100000"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="divider"></div>
+
+
+                <div class="form-section">
+
+                    <h4>Customer Engagement</h4>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>Credit Card</label>
+
+                            <select name="HasCrCard" required>
+
+                                <option value="">
+                                    Select option
+                                </option>
+
+                                <option value="1">
+                                    Yes
+                                </option>
+
+                                <option value="0">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Active Member</label>
+
+                            <select name="IsActiveMember" required>
+
+                                <option value="">
+                                    Select option
+                                </option>
+
+                                <option value="1">
+                                    Yes
+                                </option>
+
+                                <option value="0">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= BUTTON ================= -->
+
+                <div class="form-footer">
+
+                    <p>
+                        Your information is processed locally
+                        by the prediction model.
+                    </p>
+
+                    <button
+                        type="submit"
+                        id="predictButton"
+                    >
+
+                        <span id="buttonText">
+                            Analyze Churn Risk
+                        </span>
+
+                        <span id="loadingText"
+                              class="hidden">
+                            Analyzing...
+                        </span>
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </main>
+
+
+        <!-- ================= RESULT ================= -->
+
+        {% if prediction %}
+
+        <section class="result-card">
+
+            <div class="result-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        RISK ASSESSMENT
+                    </span>
+
+                    {% if probability >= 50 %}
+
+                    <h3 class="risk-high">
+                        Customer at high risk of churn
+                    </h3>
+
+                    {% else %}
+
+                    <h3 class="risk-low">
+                        Customer has a low churn risk
+                    </h3>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="probability">
+                    {{ probability }}<span>%</span>
+                </div>
+
+            </div>
+
+
+            <div class="risk-bar">
+
+                <div
+                    class="risk-fill"
+                    style="width: {{ probability }}%;"
+                ></div>
+
+            </div>
+
+
+            <div class="result-bottom">
+
+                {% if probability >= 50 %}
+
+                <p>
+                    <strong>Recommendation:</strong>
+                    This customer may require targeted
+                    retention strategies.
+                </p>
+
+                <span class="risk-badge high">
+                    HIGH RISK
+                </span>
+
+                {% else %}
+
+                <p>
+                    <strong>Recommendation:</strong>
+                    This customer currently shows a lower
+                    likelihood of leaving.
+                </p>
+
+                <span class="risk-badge low">
+                    LOW RISK
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <span>RetainIQ</span>
+            <span>•</span>
+            <span>AI-Powered Customer Retention</span>
+            <span>•</span>
+            <span>XGBoost</span>
+
+        </footer>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
